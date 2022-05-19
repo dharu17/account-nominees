@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Accounts</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> 
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">Nomination Portal</a>
+        <ul class="nav navbar-nav navbar-right">
+          <% if current_account%>
+           <!--  <li class="nav-item"><a href="#"><span class= "nav-link"></span><%#= current_account.email%></a></li> -->
+            <li class="nav-item">
+              <%= link_to current_account.email ,edit_account_registration_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Logout",destroy_account_session_path, method: :delete, class: "nav-link" %>
+            </li>
+          <% else %>%>
+            <li>
+              <%= link_to "Sign Up",new_account_registration_path, class: "glyphicon glyphicon-user" %>
+            </li>
+            <li>
+              <%= link_to "Login",new_account_session_path, class: "glyphicon glyphicon-log-in" %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
+    </div>
+  </body>
+</html>

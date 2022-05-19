@@ -1,0 +1,42 @@
+<div class="container">
+	<section class="showcase">
+		<div class="container-fluid p-0">
+			<% if current_account.present? %>
+				<div class="row no-gutters">
+					<div class="col-lg-12 ">
+						<h2>Welcome <%= current_account.email %></h2>
+						<h3> Hey <%= current_account.first_name %> your account balance is <%= current_account.account_balance %></h3>
+						<div class="lead mb-0">
+							You can do this by clicking here 	<%= link_to "Add nominee", add_nominee_account_path(current_account.id), method: :get %> . If you are adding multiple nominees, make sure to mention the % of holding that you want to allocate to each nominee so that the sum total is 100%.
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="row no-gutters">
+					<div class="col-lg-12 ">
+						<% if @nominees.present? %>
+							<h2> Nominees </h2>
+							<div class="lead mb-0">
+								<% @nominees.each do |nominee| %>
+									<p> <%= nominee.email %> </p>
+								<% end %>
+							</div>
+						<% end %>
+					</div>
+				</div>
+				<div class="row no-gutters">
+					<div class="col-lg-12 ">
+						<% if @nominated_by.present? %>
+							<h2> Nominated By </h2>
+							<div class="lead mb-0">
+								<% @nominated_by.each do |nominated_by| %>
+									<p> <%= nominated_by.email %> </p>
+								<% end %>
+							</div>
+						<% end %>
+					</div>
+				</div>
+			<% end %>
+		</div>
+	</section>
+</div>

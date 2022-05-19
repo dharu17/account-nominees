@@ -1,0 +1,33 @@
+<div class="container">
+	<div class="row">
+			<div class="col-8">
+				<h2>Edit Nominee Details</h2>
+				<%= form_for @nominee,  url: update_nominee_accounts_path(id: @nominee.id), method: "patch", :class=>"form-horizontal" do |f| %>
+					
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="weightage">Weightage:</label>
+						<div class="col-sm-10">
+							<%= f.number_field :weightage, :class=>"form-control", :required=>:true%>
+						</div>
+					</div>
+					<br>
+					<div class="form-group">        
+						<div class="col-sm-offset-2 col-sm-10">
+							<%= f.submit "Update Nominee" , :class=>"btn btn-primary"%>
+						</div>
+					</div>	
+				<% end %>
+			</div>
+			<div class="col-4">
+				<div class="card">
+					<div class="card-header">
+						Featured
+					</div>
+					<div class="card-body">
+						<h5 class="card-title"> File Nomination</h5>
+						<p class="card-text">You can add details of more than one family member if you want to make more than one nomiee by clicking on 'Add Nominee' option.</p>
+					</div>
+				</div>
+			</div>
+	</div>
+</div>

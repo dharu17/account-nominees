@@ -1,0 +1,71 @@
+<div class="container">
+	<% if current_account.nominees.any? %>
+		<% @balance_weightage = 100 - (current_account.nominees.pluck(:weightage).sum) %>
+		<h3> Hey <%=current_account.first_name %> your weightage balance is (<%= @balance_weightage.to_i %> %)</h3>
+		<br>
+		<h2>Nominees Details</h2>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Email</th>
+					<th>Firstname</th>
+					<th>Lastname</th>
+					<th>Weightage(%)</th>
+					<th>Added on</th>
+					<th> Actions </th>
+				</tr>
+			</thead>
+			<tbody>
+				<% current_account.nominees.each do |user| %>
+					<tr>
+						<td><%=h user.nominee.email %></td>
+						<td><%=h user.nominee.first_name %></td>
+						<td><%=h user.nominee.last_name %></td>
+						<td><%=h user.weightage %></td>
+						<td><%=h user.created_at %></td>
+						<td><%= link_to 'Edit', edit_nominee_accounts_path(id: user.id) %></td>
+						<td><%= link_to 'Destroy', remove_nominee_accounts_path(id: user.id), :confirm => 'Are you sure?', :method => :delete %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	<% end %>	
+</div>	
+<div class="container">
+	<div class="row">
+			<div class="col-8">
+				<h2>Add Nominee Details</h2>
+				<%= form_for :nominee,  url: add_nominee_account_path(current_account.id), method: "post", :class=>"form-horizontal" do |f| %>
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="email">Email:</label>
+						<div class="col-sm-10">
+							<%= f.email_field :email, autofocus: true, autocomplete: "email" , :class=>"form-control", :required=>:true%>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="weightage">Weightage:</label>
+						<div class="col-sm-10">
+							<%= f.number_field :weightage, :class=>"form-control", :required=>:true%>
+						</div>
+					</div>
+					<br>
+					<div class="form-group">        
+						<div class="col-sm-offset-2 col-sm-10">
+							<%= f.submit "Add Nominee" , :class=>"btn btn-primary"%>
+						</div>
+					</div>	
+				<% end %>
+			</div>
+			<div class="col-4">
+				<div class="card">
+					<div class="card-header">
+						Featured
+					</div>
+					<div class="card-body">
+						<h5 class="card-title"> File Nomination</h5>
+						<p class="card-text">You can add details of more than one family member if you want to make more than one nomiee by clicking on 'Add Nominee' option.</p>
+					</div>
+				</div>
+			</div>
+	</div>
+</div>
