@@ -23,8 +23,7 @@
 						<td><%=h user.nominee.last_name %></td>
 						<td><%=h user.weightage %></td>
 						<td><%=h user.created_at %></td>
-						<td><%= link_to 'Edit', edit_nominee_accounts_path(id: user.id) %></td>
-						<td><%= link_to 'Destroy', remove_nominee_accounts_path(id: user.id), :confirm => 'Are you sure?', :method => :delete %></td>
+						<td><%= link_to 'Edit', edit_nominee_accounts_path(id: user.id), :class=>"btn btn-primary" %> <%= link_to 'Remove', remove_nominee_accounts_path(id: user.id), :confirm => 'Are you sure?', :method => :delete, :class=>"btn btn-danger" %></td>
 					</tr>
 				<% end %>
 			</tbody>
